@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body>
+    <div id="aplicacion">
+        <table class="table table-striped">
+            <tr>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+            </tr>
+            <template v-for="articulo in articulos" >
+                <tr>
+                    <td>{{articulo.codigo}}</td>
+                    <td>{{articulo.descripcion}}</td>
+                    <td>{{articulo.precio}}</td>
+                </tr>
+            </template>        
+        </table>
+        <form v-on:submit.prevent="agregarArticulo">
+            <p>Ingrese Código <input type="number" v-model="codigo"> </p>
+            <p>Ingrese Descripción <input type="text" v-model="descripcion"> </p>
+            <p>Ingrese Precio <input type="text" v-model="precio"> </p>
+            <input type="submit" value="Agregar">
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+        var app = new Vue ({
+            el: '#aplicacion',
+            data:{
+                codigo:'',
+                descripcion:'',
+                precio:'',
+                articulos:[]
+            },
+            methods:{
+                agregarArticulo: function(){
+                    this.articulos.push({
+                        codigo: this.codigo,
+                        descripcion: this.descripcion,
+                        precio: this.precio
+                    }),
+                    this.codigo='',
+                    this.descripcion='',
+                    this.precio=''
+                }
+            }        
+        })
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
